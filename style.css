@@ -113,7 +113,7 @@ body {
     content: "";
     position: absolute;
     inset: 0;
-    background: url('images/hero-bg.jpg') center/cover no-repeat;
+    background: url('images/daddy mode.png') center/cover no-repeat;
     opacity: .15;
     z-index: -1;
 }
