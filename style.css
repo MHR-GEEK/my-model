@@ -1,5 +1,5 @@
 /* --------------------------------------------------------------
-   GLOBAL SETTINGS
+   GLOBAL SETTINGS & VARIABLES
    -------------------------------------------------------------- */
 :root {
     /* Colors */
@@ -28,7 +28,7 @@
     padding: 0;
 }
 html {
-    scroll-behavior: smooth;               /* Smooth scrolling */
+    scroll-behavior: smooth;
 }
 body {
     font-family: var(--ff-body);
@@ -69,7 +69,7 @@ body {
     color: #b3b3b3;
 }
 
-/* Glassmorphism */
+/* Glass‑morphism */
 .glass {
     background: var(--clr-glass);
     border: 1px solid var(--clr-glass-border);
@@ -109,7 +109,78 @@ body {
 }
 
 /* --------------------------------------------------------------
-   LAYOUT – HERO
+   TOP BAR + HAMBURGER MENU
+   -------------------------------------------------------------- */
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .8rem 1.2rem;
+    background: rgba(10,10,10,.85);
+    backdrop-filter: blur(8px);
+}
+.topbar__logo {
+    font-family: var(--ff-heading);
+    font-size: clamp(1rem, 4vw, 1.4rem);
+    color: var(--clr-primary);
+    flex-grow: 1;
+    text-align: center;
+}
+.topbar__spacer { width: 2rem; }               /* keeps logo centered on mobile */
+
+/* Hamburger button */
+.topbar__toggle {
+    width: 32px;
+    height: 28px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.topbar__toggle span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background: var(--clr-primary);
+    border-radius: 2px;
+    transition: transform .3s ease, opacity .3s ease;
+}
+.topbar__toggle--active span:nth-child(1) { transform: translateY(12px) rotate(45deg); }
+.topbar__toggle--active span:nth-child(2) { opacity: 0; }
+.topbar__toggle--active span:nth-child(3) { transform: translateY(-12px) rotate(-45deg); }
+
+/* --------------------------------------------------------------
+   DROPDOWN MENU (mobile)
+   -------------------------------------------------------------- */
+.menu {
+    position: sticky;
+    top: 0;
+    width: min(90%, 320px);
+    margin-inline: auto;
+    padding: 1rem;
+    display: none;                 /* hidden until toggled */
+    z-index: 999;
+}
+.menu--open { display: block; }
+.menu__list { list-style: none; }
+.menu__list li a {
+    display: block;
+    padding: .7rem 0;
+    color: var(--clr-primary);
+    text-decoration: none;
+    font-weight: 500;
+    border-bottom: 1px solid rgba(255,255,255,.05);
+    transition: color .3s;
+}
+.menu__list li a:hover { color: var(--clr-accent); }
+
+/* --------------------------------------------------------------
+   HERO SECTION
    -------------------------------------------------------------- */
 .hero {
     min-height: 100vh;
@@ -130,26 +201,36 @@ body {
 }
 .hero__content {
     text-align: center;
-    padding: 2rem 3rem;
+    padding: 2rem;
     max-width: 800px;
 }
 .hero__title {
     font-family: var(--ff-heading);
-    font-size: clamp(3rem, 10vw, 5rem);
+    font-size: clamp(2.5rem, 8vw, 5rem);
     margin-bottom: .5rem;
 }
 .hero__subtitle {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
 }
-
-/* Hero button container */
 .hero__buttons {
     display: flex;
     flex-wrap: wrap;
     gap: .8rem;
     justify-content: center;
-    margin-top: 1.5rem;
+}
+
+/* --------------------------------------------------------------
+   TAGLINE
+   -------------------------------------------------------------- */
+.tagline {
+    padding: 2rem 0;
+    text-align: center;
+}
+.tagline__text {
+    font-family: var(--ff-heading);
+    font-size: clamp(1.5rem,4vw,2.2rem);
+    color: var(--clr-accent);
 }
 
 /* --------------------------------------------------------------
@@ -163,7 +244,7 @@ body {
 .grid--3 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
 
 /* --------------------------------------------------------------
-   CARD COMPONENT
+   CARD COMPONENT (Digitals)
    -------------------------------------------------------------- */
 .card {
     overflow: hidden;
@@ -175,12 +256,10 @@ body {
     display: block;
     transition: transform .5s ease;
 }
-.card:hover .card__img {
-    transform: scale(1.08);
-}
+.card:hover .card__img { transform: scale(1.08); }
 
 /* --------------------------------------------------------------
-   GALLERY
+   GALLERY (Portfolio)
    -------------------------------------------------------------- */
 .gallery-item {
     position: relative;
@@ -198,54 +277,8 @@ body {
     filter: brightness(1.1);
 }
 
-/* Fade‑in animation (triggered on page load) */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-}
-
 /* --------------------------------------------------------------
-   NAVIGATION
-   -------------------------------------------------------------- */
-.nav {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    padding: .8rem 0;
-    background: rgba(10,10,10,.85);
-    backdrop-filter: blur(8px);
-}
-.nav__list {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    list-style: none;
-}
-.nav__list a {
-    color: var(--clr-primary);
-    text-decoration: none;
-    font-weight: 500;
-    transition: color .3s;
-}
-.nav__list a:hover {
-    color: var(--clr-accent);
-}
-
-/* --------------------------------------------------------------
-   TAGLINE
-   -------------------------------------------------------------- */
-.tagline {
-    padding: 2rem 0;
-    text-align: center;
-}
-.tagline__text {
-    font-family: var(--ff-heading);
-    font-size: clamp(1.5rem,4vw,2.2rem);
-    color: var(--clr-accent);
-}
-
-/* --------------------------------------------------------------
-   DETAILS SECTION (Profile + Measurements)
+   MODEL DETAILS (Profile + Measurements)
    -------------------------------------------------------------- */
 .details__card {
     padding: 1.5rem;
@@ -260,9 +293,7 @@ body {
     list-style: none;
     line-height: 1.8;
 }
-.details__list li strong {
-    color: var(--clr-primary);
-}
+.details__list li strong { color: var(--clr-primary); }
 
 /* --------------------------------------------------------------
    AVAILABLE‑FOR LIST
@@ -284,7 +315,7 @@ body {
 }
 
 /* --------------------------------------------------------------
-   ABOUT & CONTACT
+   ABOUT & CONTACT CARDS
    -------------------------------------------------------------- */
 .about__content,
 .contact__card {
@@ -309,12 +340,24 @@ body {
 }
 
 /* --------------------------------------------------------------
-   RESPONSIVE TWEAKS
+   ANIMATIONS
    -------------------------------------------------------------- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* --------------------------------------------------------------
+   RESPONSIVE BREAKPOINTS
+   -------------------------------------------------------------- */
+@media (max-width: 1024px) {
+    .hero__title { font-size: clamp(2rem, 9vw, 4rem); }
+}
 @media (max-width: 768px) {
-    .hero__title { font-size: clamp(2.5rem, 8vw, 4rem); }
+    .hero__title { font-size: clamp(2rem, 8vw, 3.5rem); }
     .section { padding-block: 3rem; }
-    .nav__list { flex-direction: column; gap: .5rem; }
+    .grid--2,
+    .grid--3 { grid-template-columns: 1fr; }
     .available__list { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 480px) {
