@@ -17,7 +17,9 @@
     --gap: 1.5rem;
 }
 
-/* Reset & basic typography */
+/* --------------------------------------------------------------
+   RESET & BASIC TYPOGRAPHY
+   -------------------------------------------------------------- */
 *,
 *::before,
 *::after {
@@ -46,7 +48,14 @@ body {
 }
 .section {
     padding-block: 4rem;
+    animation: fadeIn .9s ease forwards;
 }
+.section:nth-of-type(1) { animation-delay: .1s; }
+.section:nth-of-type(2) { animation-delay: .2s; }
+.section:nth-of-type(3) { animation-delay: .3s; }
+.section:nth-of-type(4) { animation-delay: .4s; }
+.section:nth-of-type(5) { animation-delay: .5s; }
+
 .section__title {
     font-family: var(--ff-heading);
     font-size: clamp(2rem, 5vw, 3rem);
@@ -70,7 +79,9 @@ body {
     box-shadow: 0 8px 32px rgba(0,0,0,.25);
 }
 
-/* Buttons */
+/* --------------------------------------------------------------
+   BUTTONS
+   -------------------------------------------------------------- */
 .btn {
     display: inline-block;
     padding: .75rem 1.5rem;
@@ -132,6 +143,15 @@ body {
     margin-bottom: 2rem;
 }
 
+/* Hero button container */
+.hero__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .8rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
 /* --------------------------------------------------------------
    GRID SYSTEM
    -------------------------------------------------------------- */
@@ -183,14 +203,85 @@ body {
     from { opacity: 0; transform: translateY(20px); }
     to   { opacity: 1; transform: translateY(0); }
 }
-.section {
-    animation: fadeIn .9s ease forwards;
+
+/* --------------------------------------------------------------
+   NAVIGATION
+   -------------------------------------------------------------- */
+.nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: .8rem 0;
+    background: rgba(10,10,10,.85);
+    backdrop-filter: blur(8px);
 }
-.section:nth-of-type(1) { animation-delay: .1s; }
-.section:nth-of-type(2) { animation-delay: .2s; }
-.section:nth-of-type(3) { animation-delay: .3s; }
-.section:nth-of-type(4) { animation-delay: .4s; }
-.section:nth-of-type(5) { animation-delay: .5s; }
+.nav__list {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    list-style: none;
+}
+.nav__list a {
+    color: var(--clr-primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color .3s;
+}
+.nav__list a:hover {
+    color: var(--clr-accent);
+}
+
+/* --------------------------------------------------------------
+   TAGLINE
+   -------------------------------------------------------------- */
+.tagline {
+    padding: 2rem 0;
+    text-align: center;
+}
+.tagline__text {
+    font-family: var(--ff-heading);
+    font-size: clamp(1.5rem,4vw,2.2rem);
+    color: var(--clr-accent);
+}
+
+/* --------------------------------------------------------------
+   DETAILS SECTION (Profile + Measurements)
+   -------------------------------------------------------------- */
+.details__card {
+    padding: 1.5rem;
+}
+.details__heading {
+    font-family: var(--ff-heading);
+    font-size: 1.4rem;
+    margin-bottom: .8rem;
+    color: var(--clr-accent);
+}
+.details__list {
+    list-style: none;
+    line-height: 1.8;
+}
+.details__list li strong {
+    color: var(--clr-primary);
+}
+
+/* --------------------------------------------------------------
+   AVAILABLE‑FOR LIST
+   -------------------------------------------------------------- */
+.available__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: .8rem;
+    list-style: none;
+    padding: 1rem;
+}
+.available__list li {
+    background: var(--clr-glass);
+    border: 1px solid var(--clr-glass-border);
+    border-radius: .5rem;
+    padding: .6rem .9rem;
+    text-align: center;
+    font-weight: 500;
+}
 
 /* --------------------------------------------------------------
    ABOUT & CONTACT
@@ -213,6 +304,9 @@ body {
     color: #777;
     border-top: 1px solid rgba(255,255,255,.07);
 }
+.footer.glass {
+    background: rgba(255,255,255,.04);
+}
 
 /* --------------------------------------------------------------
    RESPONSIVE TWEAKS
@@ -220,8 +314,11 @@ body {
 @media (max-width: 768px) {
     .hero__title { font-size: clamp(2.5rem, 8vw, 4rem); }
     .section { padding-block: 3rem; }
+    .nav__list { flex-direction: column; gap: .5rem; }
+    .available__list { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 480px) {
     .btn { padding: .6rem 1rem; }
     .hero__subtitle { font-size: 1rem; }
+    .available__list { grid-template-columns: 1fr; }
 }
