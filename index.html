@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Basic meta -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mohammed Haris Raza – Fashion Model Portfolio</title>
@@ -15,9 +14,17 @@
 </head>
 <body>
 
-    <!-- ====================== NAVIGATION ====================== -->
-    <nav class="nav glass">
-        <ul class="nav__list">
+    <!-- ====================== TOP BAR + MENU ====================== -->
+    <header class="topbar glass">
+        <button class="topbar__toggle" id="menuToggle" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+        <h1 class="topbar__logo">MOHAMMED HARIS RAZA</h1>
+        <span class="topbar__spacer"></span> <!-- keeps the logo centered on mobile -->
+    </header>
+
+    <nav class="menu glass" id="menu">
+        <ul class="menu__list">
             <li><a href="#hero">Home</a></li>
             <li><a href="#details">Model Details</a></li>
             <li><a href="#digitals">Digitals</a></li>
@@ -31,7 +38,7 @@
     <!-- ====================== HERO ====================== -->
     <section id="hero" class="section hero">
         <div class="hero__content glass">
-            <h1 class="hero__title">MOHAMMED HARIS RAZA</h1>
+            <h2 class="hero__title">MOHAMMED HARIS RAZA</h2>
             <p class="hero__subtitle">
                 Fashion Model<br>
                 Editorial • High Fashion • Commercial<br>
@@ -40,7 +47,6 @@
 
             <div class="hero__buttons">
                 <a href="#portfolio" class="btn btn-primary">View Portfolio</a>
-                <a href="assets/comp-card.pdf" class="btn btn-secondary" download>Download Comp Card</a>
                 <a href="#contact" class="btn btn-secondary">Get In Touch</a>
                 <a href="#contact" class="btn btn-primary">Book Now</a>
             </div>
@@ -58,9 +64,7 @@
     <section id="details" class="section details">
         <div class="container">
             <h2 class="section__title">Model Details</h2>
-
             <div class="grid grid--2">
-                <!-- LEFT – Profile -->
                 <div class="details__card glass">
                     <h3 class="details__heading">Profile</h3>
                     <ul class="details__list">
@@ -72,8 +76,6 @@
                         <li><strong>Languages:</strong> English • Hindi • Kannada</li>
                     </ul>
                 </div>
-
-                <!-- RIGHT – Measurements -->
                 <div class="details__card glass">
                     <h3 class="details__heading">Measurements</h3>
                     <ul class="details__list">
@@ -97,7 +99,6 @@
         <div class="container">
             <h2 class="section__title">Digitals</h2>
             <p class="section__desc">Head/Test‑shots.</p>
-
             <div class="grid grid--2">
                 <div class="card glass">
                     <img src="images/HarisRaza_raw-face.png" alt="Front View" class="card__img">
@@ -108,8 +109,6 @@
                 <div class="card glass">
                     <img src="images/HarisRaza_right-profile.png" alt="Right Profile" class="card__img">
                 </div>
-                 <section id="digitals" class="section digitals">
-        <div class="container">
                 <div class="card glass">
                     <img src="images/HarisRaza_full-body.png" alt="Full Body" class="card__img">
                 </div>
@@ -122,7 +121,6 @@
         <div class="container">
             <h2 class="section__title">Editorial Portfolio</h2>
             <p class="section__desc">Selective editorials.</p>
-
             <div class="grid grid--3">
                 <div class="gallery-item">
                     <img src="images/HarisRaza_BW-editorial.png" alt="Editorial – Black & White">
@@ -152,8 +150,8 @@
             <h2 class="section__title">About Me</h2>
             <div class="about__content glass">
                 <p>
-                    Mohammed Haris Raza is an aspiring fashion model specializing in editorial, high fashion, and commercial work. 
-                    With a clean, modern aesthetic and a versatile presence, he aims to create compelling visual stories through fashion photography 
+                    Mohammed Haris Raza is an aspiring fashion model specializing in editorial, high fashion, and commercial work.
+                    With a clean, modern aesthetic and a versatile presence, he aims to create compelling visual stories through fashion photography
                     and creative collaborations. Open to agency representation, editorials, campaigns, lookbooks, runway, and international opportunities.
                 </p>
                 <a href="#contact" class="btn btn-secondary">Get in Touch</a>
@@ -165,7 +163,6 @@
     <section id="available" class="section available">
         <div class="container">
             <h2 class="section__title">Available For</h2>
-
             <ul class="available__list">
                 <li>Editorial</li>
                 <li>Commercial</li>
@@ -199,5 +196,31 @@
         </div>
     </footer>
 
+    <!-- JavaScript for hamburger -->
+    <script>
+        const toggle = document.getElementById('menuToggle');
+        const menu   = document.getElementById('menu');
+
+        toggle.addEventListener('click', () => {
+            menu.classList.toggle('menu--open');
+            toggle.classList.toggle('topbar__toggle--active');
+        });
+
+        // Close menu when a link is clicked (mobile)
+        document.querySelectorAll('.menu__list a').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.remove('menu--open');
+                toggle.classList.remove('topbar__toggle--active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!menu.contains(e.target) && !toggle.contains(e.target)) {
+                menu.classList.remove('menu--open');
+                toggle.classList.remove('topbar__toggle--active');
+            }
+        });
+    </script>
 </body>
 </html>
