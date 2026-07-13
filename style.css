@@ -1,6 +1,6 @@
-/* --------------------------------------------------------------
+/* ==============================================================
    GLOBAL SETTINGS & VARIABLES
-   -------------------------------------------------------------- */
+   ============================================================== */
 :root {
     /* Colors */
     --clr-bg: #0a0a0a;               /* Dark background */
@@ -27,9 +27,7 @@
     margin: 0;
     padding: 0;
 }
-html {
-    scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 body {
     font-family: var(--ff-body);
     background: var(--clr-bg);
@@ -69,7 +67,7 @@ body {
     color: #b3b3b3;
 }
 
-/* Glass‑morphism */
+/* Glass‑morphism helper */
 .glass {
     background: var(--clr-glass);
     border: 1px solid var(--clr-glass-border);
@@ -109,7 +107,7 @@ body {
 }
 
 /* --------------------------------------------------------------
-   TOP BAR + HAMBURGER MENU
+   TOP BAR + HAMBURGER
    -------------------------------------------------------------- */
 .topbar {
     position: sticky;
@@ -129,7 +127,7 @@ body {
     flex-grow: 1;
     text-align: center;
 }
-.topbar__spacer { width: 2rem; }               /* keeps logo centered on mobile */
+.topbar__spacer { width: 2rem; }               /* balances the toggle on the right */
 
 /* Hamburger button */
 .topbar__toggle {
@@ -155,7 +153,7 @@ body {
 .topbar__toggle--active span:nth-child(3) { transform: translateY(-12px) rotate(-45deg); }
 
 /* --------------------------------------------------------------
-   DROPDOWN MENU (mobile)
+   DROPDOWN MENU (mobile & desktop)
    -------------------------------------------------------------- */
 .menu {
     position: sticky;
@@ -244,7 +242,7 @@ body {
 .grid--3 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
 
 /* --------------------------------------------------------------
-   CARD COMPONENT (Digitals)
+   CARD COMPONENT (used for digitals & generic cards)
    -------------------------------------------------------------- */
 .card {
     overflow: hidden;
@@ -259,7 +257,7 @@ body {
 .card:hover .card__img { transform: scale(1.08); }
 
 /* --------------------------------------------------------------
-   GALLERY (Portfolio)
+   GALLERY (portfolio)
    -------------------------------------------------------------- */
 .gallery-item {
     position: relative;
@@ -275,6 +273,29 @@ body {
 .gallery-item:hover img {
     transform: scale(1.12);
     filter: brightness(1.1);
+}
+
+/* --------------------------------------------------------------
+   DIGITALS – HEADSHOTS + FULL‑BODY
+   -------------------------------------------------------------- */
+.digitals__headshots {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);   /* three columns on desktop */
+    gap: var(--gap);
+}
+.digitals__fullbody {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;                /* centers the full‑body card */
+}
+.digitals__fullbody .card {
+    max-width: 420px;                        /* limits width on larger screens */
+    width: 100%;
+}
+.digitals__fullbody .card__img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
 }
 
 /* --------------------------------------------------------------
@@ -335,9 +356,7 @@ body {
     color: #777;
     border-top: 1px solid rgba(255,255,255,.07);
 }
-.footer.glass {
-    background: rgba(255,255,255,.04);
-}
+.footer.glass { background: rgba(255,255,255,.04); }
 
 /* --------------------------------------------------------------
    ANIMATIONS
@@ -353,12 +372,20 @@ body {
 @media (max-width: 1024px) {
     .hero__title { font-size: clamp(2rem, 9vw, 4rem); }
 }
+@media (max-width: 992px) {
+    .digitals__headshots { grid-template-columns: repeat(2, 1fr); }
+}
 @media (max-width: 768px) {
     .hero__title { font-size: clamp(2rem, 8vw, 3.5rem); }
     .section { padding-block: 3rem; }
     .grid--2,
-    .grid--3 { grid-template-columns: 1fr; }
+    .grid--3,
+    .digitals__headshots { grid-template-columns: 1fr; }
     .available__list { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+    .digitals__headshots { grid-template-columns: 1fr; }
+    .digitals__fullbody .card { max-width: 100%; }
 }
 @media (max-width: 480px) {
     .btn { padding: .6rem 1rem; }
